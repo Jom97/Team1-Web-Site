@@ -1,0 +1,90 @@
+<!-- Add Form -->
+<div class="container">
+  <div class="width">
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">New Enquiry</h4>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="addForm" autocomplete=off>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <div class="input-group">
+            <input formControlName="name" placeholder="Enter Your Name" class="form-control">
+          </div>
+          <div *ngIf="(isSubmitted || formControls.name.touched) && formControls.name.errors">
+            <div *ngIf="formControls.name.errors" class="text-danger">
+              <span *ngIf="formControls.name.errors?.required"><sup>*</sup>Name is required</span>
+              <span *ngIf="formControls.name.errors?.pattern"><sup>*</sup>Enter a valid name</span>
+              <span *ngIf="formControls.name.errors?.minlength"><sup>*</sup>Name should have minimum 2
+                characters</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="dob">DOB</label>
+          <div class="input-group">
+            <input formControlName="dob" type="date" class="form-control">
+          </div>
+          <div *ngIf="(isSubmitted || formControls.dob.touched) && formControls.dob.errors">
+            <div *ngIf="formControls.dob.errors" class="text-danger">
+              <span *ngIf="formControls.dob.errors?.required"><sup>*</sup>Dob is required</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-group">
+            <input formControlName="email" placeholder="Enter Email Id" class="form-control">
+          </div>
+          <div *ngIf="(isSubmitted || formControls.email.touched) && formControls.email.errors">
+            <div *ngIf="formControls.email.errors" class="text-danger">
+              <span *ngIf=" formControls.email.errors?.required"><sup>*</sup>Email is required</span>
+              <span *ngIf="formControls.email.errors?.email"><sup>*</sup>Enter a valid Email Id</span>
+            </div>
+          </div>
+        </div>
+        <div class=" form-group">
+          <label for="highestQual">Highest Qualification</label>
+          <div class="input-group">
+            <input formControlName="highestQual" class="form-control" placeholder="Enter Higest Qualification">
+          </div>
+          <div *ngIf="(isSubmitted || formControls.highestQual.touched) && formControls.highestQual.errors">
+            <div *ngIf="formControls.highestQual.errors" class="text-danger">
+              <span *ngIf="formControls.highestQual.errors?.required"><sup>*</sup>Highest Qualification is
+                required</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group" formArrayName="enquiredCourses">
+          <label>Enquired Course</label><br>
+          <span *ngFor="let course of allCourses; let i = index;">
+            <input *ngIf="course.active==true" type="checkbox" [formControlName]="i">
+            <label *ngIf="course.active==true">
+              {{course.courseName}}
+            </label>
+          </span>
+        </div>
+        <!-- <div class="form-group">
+          <label>Status</label>
+          <div>
+            <select formControlName="status" class="form-control">
+              <option selected disabled value="">Select Status</option>
+              <option *ngFor="let status of statuses" value="{{status.statusId}}">
+                {{status.statusName}}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="(isSubmitted || formControls.status.touched) && formControls.status.errors">
+            <div *ngIf="formControls.status.errors" class="text-danger">
+              <span *ngIf="formControls.status.errors?.required"><sup>*</sup>Select a valid
+                Status</span>
+            </div>
+          </div>
+        </div> -->
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button (click)="onSubmit()" class="btn btn-info">Submit</button>
+    </div>
+  </div>
+</div>
